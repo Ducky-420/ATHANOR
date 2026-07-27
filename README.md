@@ -31,7 +31,7 @@ src/
 ├── App.jsx                # root component, all state + handlers
 ├── data/days.js            # the workout program (days, exercises, pools)
 ├── lib/                    # storage + date helpers
-├── hooks/useToast.jsx       # toast notification context
+├── hooks/                   # ToastContext, ToastProvider, useToast
 ├── components/              # RestTimer, SetRow, ExCard, Toast, EmptyState, ErrorBoundary
 └── styles/                  # design tokens + shell CSS
 ```
@@ -44,6 +44,30 @@ npm run dev       # start the dev server
 npm run build     # production build to dist/
 npm run preview   # preview the production build locally
 npm run lint       # run ESLint
+npm run test        # run the Vitest suite
+```
+
+## Deployment
+
+### Production
+
+- **URL:** [athanor-red.vercel.app](https://athanor-red.vercel.app)
+- **Provider:** [Vercel](https://vercel.com), connected directly to this GitHub repo (native Git integration — no GitHub Actions involved in deploys)
+- **CI status:** ![Build Status](https://github.com/Ducky-420/ATHANOR/actions/workflows/ci.yml/badge.svg)
+
+### How it works
+
+1. GitHub Actions (`.github/workflows/ci.yml`) runs `npm ci`, lint, and build on every push/PR to `main` — this is a correctness gate, independent of deployment.
+2. Vercel's GitHub App watches the same repo separately. Every push to `main` triggers a new production deployment automatically, live within about a minute.
+3. Every pull request gets its own preview deployment with a unique URL, posted as a comment/check on the PR by Vercel — test changes live before merging, with zero impact on production.
+
+### Manual deploy
+
+If you have the [Vercel CLI](https://vercel.com/docs/cli) installed and linked (`vercel link`):
+
+```bash
+npm run build
+vercel --prod
 ```
 
 ## Privacy
