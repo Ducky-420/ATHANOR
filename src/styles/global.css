@@ -1,0 +1,7 @@
+/* App-shell rules that need real CSS (not inline styles) because they use
+   the dual-declaration dvh-with-fallback trick, which a JS style object
+   can't express (only one value per property key). */
+.app-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+}

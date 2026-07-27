@@ -1,0 +1,27 @@
+/*
+ * Design tokens — ported from the original inline `C` palette object.
+ * --dim and --faint were adjusted for WCAG AA contrast (4.5:1 minimum for
+ * normal-size text) against every background they're used on; every other
+ * token already passed and is unchanged. See CONTRIBUTING.md for the audit.
+ */
+:root {
+  --bg: #0A0810;
+  --surface: #12101A;
+  --surface-hi: #181524;
+  --border: #241F35;
+  --border-hi: #332B4A;
+  --text-primary: #EDEAF5;
+  --dim: #8981A8;      /* was #6B6284 (~3.4:1) — now ~5.1:1+ on bg/surface/input */
+  --faint: #837998;    /* was #453D5C (~1.9:1) — now ~4.6:1+ on bg/surface/input */
+  --accent: #A78BFA;
+  --accent-dim: #7C5CD6;
+  --accent-bd: #A78BFA33;
+  --done: #34D399;
+  --done-bg: #34D39912;
+  --done-bd: #34D39938;
+  --extra: #F0ABFC;
+  --extra-bg: #F0ABFC10;
+  --extra-bd: #F0ABFC30;
+  --input: #0D0B14;
+  --danger: #F87171;
+}

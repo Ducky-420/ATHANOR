@@ -1,0 +1,86 @@
+export const DAYS = {
+  d1: {
+    name: "Upper A",
+    focus: "Chest + Triceps",
+    tag: "DAY 1",
+    baseline: [
+      { id: "a1", name: "Incline Chest Press", sets: 4, target: "6–10", perSide: true, group: "Chest" },
+      { id: "a2", name: "Flat Chest Press", sets: 3, target: "8–10", perSide: true, group: "Chest", variants: ["Free Weight", "Pin Select"] },
+      { id: "a3", name: "Chest-Supported Row", sets: 4, target: "8–10", perSide: true, group: "Back" },
+      { id: "a4", name: "Lat Pulldown", sets: 3, target: "8–10", perSide: false, group: "Back" },
+      { id: "a5", name: "Shoulder Press", sets: 3, target: "8–10", perSide: true, group: "Shoulders", variants: ["Free Weight", "Pin Select"] },
+      { id: "a6", name: "Lateral Raise", sets: 3, target: "12–20", perSide: true, group: "Shoulders" },
+      { id: "a7", name: "Bar Pushdown", sets: 3, target: "10–12", perSide: false, group: "Triceps" },
+      { id: "a8", name: "Overhead Cable Ext", sets: 3, target: "10–12", perSide: false, group: "Triceps" },
+      { id: "a9", name: "EZ Bar Curl", sets: 3, target: "10–12", perSide: false, group: "Biceps" },
+    ],
+    poolLabel: "Chest &/or Triceps",
+    pool: [
+      { id: "ax1", name: "Pec Deck / Cable Fly", sets: 3, target: "10–15", perSide: false, group: "Chest" },
+      { id: "ax2", name: "Chest Dip", sets: 3, target: "8–12", perSide: false, group: "Chest" },
+      { id: "ax3", name: "Rope Pushdown", sets: 3, target: "10–12", perSide: false, group: "Triceps" },
+      { id: "ax4", name: "Overhead DB Ext", sets: 3, target: "10–12", perSide: false, group: "Triceps" },
+    ],
+  },
+  d2: {
+    name: "Lower A",
+    focus: "Quads",
+    tag: "DAY 2",
+    baseline: [
+      { id: "b1", name: "Hack Squat", sets: 4, target: "8–12", perSide: true, group: "Quads" },
+      { id: "b2", name: "Leg Press", sets: 3, target: "10–12", perSide: true, group: "Quads" },
+      { id: "b3", name: "Leg Extension", sets: 3, target: "12–15", perSide: false, group: "Quads" },
+      { id: "b4", name: "Lying Leg Curl", sets: 3, target: "10–12", perSide: false, group: "Hamstrings" },
+      { id: "b5", name: "Standing Calf Raise", sets: 3, target: "15–20", perSide: false, group: "Calves" },
+      { id: "b6", name: "Seated Calf Raise", sets: 3, target: "15–20", perSide: false, group: "Calves" },
+    ],
+    poolLabel: "Core",
+    pool: [
+      { id: "bx1", name: "Cable Crunch", sets: 3, target: "12–15", perSide: false, group: "Core" },
+      { id: "bx2", name: "Hanging Knee Raise", sets: 3, target: "12–15", perSide: false, group: "Core", bodyweight: true },
+    ],
+  },
+  d3: {
+    name: "Upper B",
+    focus: "Back + Biceps",
+    tag: "DAY 3",
+    baseline: [
+      { id: "c1", name: "Incline Chest Press", sets: 4, target: "6–10", perSide: true, group: "Chest" },
+      { id: "c2", name: "Flat Chest Press", sets: 3, target: "8–10", perSide: true, group: "Chest", variants: ["Free Weight", "Pin Select"] },
+      { id: "c3", name: "Assisted Pull-ups", sets: 4, target: "8–10", perSide: false, group: "Back", assist: true },
+      { id: "c4", name: "Seated Cable Row", sets: 3, target: "8–10", perSide: false, group: "Back" },
+      { id: "c5", name: "Lateral Raise", sets: 3, target: "12–20", perSide: true, group: "Shoulders" },
+      { id: "c6", name: "Face Pulls", sets: 3, target: "15–20", perSide: false, group: "Shoulders" },
+      { id: "c7", name: "EZ Bar Curl", sets: 3, target: "10–12", perSide: false, group: "Biceps" },
+      { id: "c8", name: "Hammer Curl", sets: 3, target: "10–12", perSide: true, group: "Biceps" },
+      { id: "c9", name: "Tricep Pushdown (Mach)", sets: 3, target: "10–12", perSide: false, group: "Triceps" },
+    ],
+    poolLabel: "Back &/or Biceps",
+    pool: [
+      { id: "cx1", name: "Straight-Arm Pulldown", sets: 3, target: "12–15", perSide: false, group: "Back" },
+      { id: "cx2", name: "Pulldown Machine", sets: 3, target: "8–10", perSide: true, group: "Back", variants: ["Both Arms", "Single Arm"] },
+      { id: "cx3", name: "Incline DB Curl", sets: 3, target: "10–12", perSide: true, group: "Biceps" },
+      { id: "cx4", name: "Cable Curl", sets: 3, target: "10–12", perSide: false, group: "Biceps" },
+    ],
+  },
+  d4: {
+    name: "Lower B",
+    focus: "Hamstrings",
+    tag: "DAY 4",
+    baseline: [
+      { id: "d1", name: "Romanian Deadlift", sets: 4, target: "8–10", perSide: true, group: "Hamstrings" },
+      { id: "d2", name: "Lying Leg Curl", sets: 3, target: "10–12", perSide: false, group: "Hamstrings" },
+      { id: "d3", name: "Leg Press", sets: 3, target: "10–12", perSide: true, group: "Quads" },
+      { id: "d4", name: "Back Extension", sets: 3, target: "12–15", perSide: false, group: "Posterior", bodyweight: true },
+      { id: "d5", name: "Seated Calf Raise", sets: 3, target: "15–20", perSide: false, group: "Calves" },
+      { id: "d6", name: "Standing Calf Raise", sets: 3, target: "15–20", perSide: false, group: "Calves" },
+    ],
+    poolLabel: "Core",
+    pool: [
+      { id: "dx1", name: "Hanging Leg Raise", sets: 3, target: "8–12", perSide: false, group: "Core", bodyweight: true },
+      { id: "dx2", name: "Plank", sets: 3, target: "30–45s", perSide: false, group: "Core", bodyweight: true, timed: true },
+    ],
+  },
+};
+
+export const DAY_ORDER = ["d1", "d2", "d3", "d4"];
