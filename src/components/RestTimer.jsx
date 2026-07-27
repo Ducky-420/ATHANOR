@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { fmtTime } from "../lib/dateUtils.js";
+import { REST_TIMER_BOTTOM } from "../lib/layout.js";
 
 export default function RestTimer({ seconds, onClose }) {
   const [left, setLeft] = useState(seconds);
@@ -22,7 +23,7 @@ export default function RestTimer({ seconds, onClose }) {
       role="status"
       style={{
         position: "fixed",
-        bottom: "calc(12px + env(safe-area-inset-bottom))",
+        bottom: REST_TIMER_BOTTOM,
         left: "50%",
         transform: "translateX(-50%)",
         width: "calc(100% - 24px)",

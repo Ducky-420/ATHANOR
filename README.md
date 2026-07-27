@@ -7,10 +7,13 @@ A minimal, offline-first workout logging PWA. Pick a day, log your sets, keep yo
 
 ## Features
 
+- **Three sections** behind a floating bottom tab bar: **Log** (today's workout), **Progress** (session history, streak, completion chart), **Body** (weight trend)
 - **4-day upper/lower split** built in, with baseline exercises plus an optional "extras" pool per day
 - **Per-set logging** — weight, reps, and a done toggle, with sensible units per exercise (kg, kg/side, assist, timed)
-- **Rest timer** that auto-starts after a completed set (longer rest for compound lifts), with a skip/+30s control
+- **Rest timer** that auto-starts after a completed set (longer rest for compound lifts), floats as a glass sheet above the tab bar
 - **Session notes and exercise variants** (e.g. free weight vs. pin-select) per exercise
+- **Session history** — finishing a day and hitting Reset archives it to the Progress tab (streak, completion-by-session chart, recent sessions), with a 30-second undo
+- **Body weight tracking** — log a daily weight, see a trend line and week-over-week delta
 - **Copy session log** — formats the whole session as plain text for pasting into Notes/Slack/wherever
 - **Installable PWA** with a splash screen, safe-area-aware layout, and offline support via `localStorage`
 - **Local-only data** — everything is stored in the browser's `localStorage`; nothing is sent to a server
@@ -18,8 +21,9 @@ A minimal, offline-first workout logging PWA. Pick a day, log your sets, keep yo
 
 ## Architecture
 
-- **[Vite](https://vitejs.dev/)** + **React 18** — no backend, no framework beyond what Vite + React provide
-- All state lives in `App.jsx` and persists to `localStorage` on every change
+- **[Vite](https://vitejs.dev/)** + **React 18** — no backend, no framework beyond what Vite + React provide, no router (screen switching is plain state in `App.jsx`)
+- `App.jsx` is a thin navigation shell: it owns `screen`/`history`/`bodyLog` state and renders the floating `TabBar` plus the active screen (`LogScreen`, `ProgressScreen`, or `BodyScreen`)
+- `LogScreen` owns today's workout state (unchanged from before the nav was added) and persists it independently from `history`/`bodyLog` — `saveStore` does a safe read-merge-write so the two can't clobber each other
 - Static workout program data lives in `src/data/days.js`
 - Colors are CSS custom properties defined in `src/styles/tokens.css`, referenced from component inline styles — see [CONTRIBUTING.md](CONTRIBUTING.md) for the convention
 - The rest timer is code-split via `React.lazy`/`Suspense`, since it's the one conditionally-rendered overlay in the app
@@ -28,11 +32,12 @@ A minimal, offline-first workout logging PWA. Pick a day, log your sets, keep yo
 ```
 src/
 ├── main.jsx              # entry: ErrorBoundary + ToastProvider + App
-├── App.jsx                # root component, all state + handlers
+├── App.jsx                # navigation shell: screen/history/bodyLog state + TabBar
+├── screens/                 # LogScreen, ProgressScreen, BodyScreen
 ├── data/days.js            # the workout program (days, exercises, pools)
-├── lib/                    # storage + date helpers
+├── lib/                    # storage, date, session-history, and body-log helpers
 ├── hooks/                   # ToastContext, ToastProvider, useToast
-├── components/              # RestTimer, SetRow, ExCard, Toast, EmptyState, ErrorBoundary
+├── components/              # TabBar, RestTimer, SetRow, ExCard, Toast, EmptyState, ErrorBoundary
 └── styles/                  # design tokens + shell CSS
 ```
 

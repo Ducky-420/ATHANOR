@@ -36,4 +36,16 @@
   --done-glow: 0 0 0 1px var(--done-bd), 0 0 14px rgba(52, 211, 153, 0.3);
 
   --radius-lg: 16px;
+  --radius-float: 22px;
+
+  /* Spacing — from the Athanor redesign spec. */
+  --gap-card: 8px;
+  --gap-setrow: 6px;
+  --pad-card: 13px 14px;
+  --gap-timer: 10px;
+
+  /* Named easing curves — same values already used inline throughout the
+     app; named here per the redesign spec for new components to reference. */
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-sheet: cubic-bezier(0.22, 1, 0.36, 1);
 }

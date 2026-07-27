@@ -13,11 +13,15 @@ export function loadStore() {
   return null;
 }
 
-// onError is called with a human-readable message when the write fails
-// (storage quota exceeded, private browsing restrictions, etc).
-export function saveStore(store, onError) {
+// Merges `partial` into whatever's currently stored and writes the result —
+// safe for independent callers (LogScreen, the app shell) to each persist
+// their own slice without clobbering the other's fields. onError is called
+// with a human-readable message when the write fails (storage quota
+// exceeded, private browsing restrictions, etc).
+export function saveStore(partial, onError) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+    const current = loadStore() ?? {};
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...current, ...partial }));
   } catch {
     onError?.("Could not save your workout — storage may be full or unavailable.");
   }
