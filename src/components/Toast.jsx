@@ -31,12 +31,14 @@ export default function Toast({ toasts, onDismiss }) {
             display: "flex",
             alignItems: "center",
             gap: 10,
-            background: "var(--surface-hi)",
+            background: "var(--surface-glass)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
             border: `1px solid ${VARIANT_COLOR[t.variant] ?? "var(--border-hi)"}`,
             borderLeft: `3px solid ${VARIANT_COLOR[t.variant] ?? "var(--border-hi)"}`,
-            borderRadius: 10,
+            borderRadius: "var(--radius-lg)",
             padding: "12px 14px",
-            boxShadow: "0 8px 24px rgba(0,0,0,.4)",
+            boxShadow: "var(--shadow-md)",
             animation: "bannerIn .3s cubic-bezier(.34,1.56,.64,1) both",
           }}
         >

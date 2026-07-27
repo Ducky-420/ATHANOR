@@ -22,17 +22,20 @@ export default function RestTimer({ seconds, onClose }) {
       role="status"
       style={{
         position: "fixed",
-        bottom: 0,
+        bottom: "calc(12px + env(safe-area-inset-bottom))",
         left: "50%",
         transform: "translateX(-50%)",
-        width: "100%",
-        maxWidth: 480,
+        width: "calc(100% - 24px)",
+        maxWidth: 456,
         zIndex: 50,
         boxSizing: "border-box",
-        background: "var(--surface-hi)",
-        borderTop: `1px solid ${done ? "var(--done-bd)" : "var(--accent-bd)"}`,
-        padding: "12px 20px calc(16px + env(safe-area-inset-bottom))",
-        boxShadow: "0 -8px 32px rgba(0,0,0,.5)",
+        background: "var(--surface-glass)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: `1px solid ${done ? "var(--done-bd)" : "var(--accent-bd)"}`,
+        borderRadius: "var(--radius-lg)",
+        padding: "14px 18px",
+        boxShadow: "var(--shadow-lg)",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>

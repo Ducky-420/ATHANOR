@@ -156,6 +156,7 @@ export default function App() {
           padding: "26px 20px 18px",
           background: "linear-gradient(180deg, var(--surface-hi) 0%, var(--bg) 100%)",
           borderBottom: "1px solid var(--border)",
+          boxShadow: "var(--shadow-sm)",
         }}
       >
         <div style={{ marginBottom: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -345,6 +346,7 @@ export default function App() {
               letterSpacing: ".06em",
               background: dayId === id ? "var(--accent)" : "var(--surface)",
               color: dayId === id ? "var(--bg)" : "var(--dim)",
+              boxShadow: dayId === id ? "var(--accent-glow)" : "none",
               transition: "all .18s",
               display: "flex",
               alignItems: "center",
@@ -422,7 +424,16 @@ export default function App() {
         </button>
 
         {showPool && (
-          <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 11, padding: 7, marginBottom: 4 }}>
+          <div
+            style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              borderRadius: 11,
+              padding: 7,
+              marginBottom: 4,
+              boxShadow: "var(--shadow-sm)",
+            }}
+          >
             {day.pool.length === 0 ? (
               <EmptyState title="No optional exercises" message="This day has no extras configured." />
             ) : (
@@ -494,6 +505,7 @@ export default function App() {
             alignItems: "center",
             justifyContent: "center",
             gap: 9,
+            boxShadow: copied ? "var(--done-glow)" : "var(--shadow-sm)",
             transition: "all .2s",
           }}
         >

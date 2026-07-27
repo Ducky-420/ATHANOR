@@ -116,6 +116,7 @@ export default function SetRow({ set, def, onChange, onDone }) {
           cursor: "pointer",
           border: `1.5px solid ${set.done ? "var(--done)" : "var(--border)"}`,
           background: set.done ? "var(--done)" : "transparent",
+          boxShadow: set.done ? "var(--done-glow)" : "none",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

@@ -21,8 +21,9 @@ export default function ExCard({ def, data, open, onToggle, onSet, onDone, onNot
         background: allDone ? "var(--done-bg)" : isExtra ? "var(--extra-bg)" : "var(--surface)",
         border: `1px solid ${allDone ? "var(--done-bd)" : isExtra ? "var(--extra-bd)" : "var(--border)"}`,
         borderRadius: 12,
-        marginBottom: 7,
+        marginBottom: 8,
         overflow: "hidden",
+        boxShadow: allDone ? "var(--done-glow)" : "var(--shadow-sm)",
         transition: "all .2s",
         animation: idx != null ? "cardIn .32s cubic-bezier(.22,1,.36,1) both" : "none",
         animationDelay: idx != null ? `${Math.min(idx * 35, 280)}ms` : "0ms",
@@ -38,11 +39,11 @@ export default function ExCard({ def, data, open, onToggle, onSet, onDone, onNot
           background: "transparent",
           border: "none",
           cursor: "pointer",
-          padding: "12px 13px",
+          padding: "13px 14px",
           minHeight: 44,
           display: "flex",
           alignItems: "center",
-          gap: 11,
+          gap: 12,
           textAlign: "left",
         }}
       >
@@ -108,7 +109,7 @@ export default function ExCard({ def, data, open, onToggle, onSet, onDone, onNot
       </button>
 
       {open && (
-        <div id={bodyId} style={{ padding: "0 13px 12px" }}>
+        <div id={bodyId} style={{ padding: "0 14px 14px" }}>
           {def.variants && (
             <div style={{ display: "flex", gap: 5, marginBottom: 9 }}>
               {def.variants.map((v) => (
