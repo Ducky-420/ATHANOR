@@ -124,7 +124,7 @@ export default function SetRow({ set, def, onChange, onDone }) {
           transform: pop ? "scale(1.18)" : "scale(1)",
         }}
       >
-        {set.done && <Tick color="#0A0810" />}
+        {set.done && <Tick color="var(--bg)" />}
         {pop && (
           <span
             style={{

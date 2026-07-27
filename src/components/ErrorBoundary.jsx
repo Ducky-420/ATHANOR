@@ -15,8 +15,8 @@ export default class ErrorBoundary extends Component {
     if (this.state.hasError) {
       return (
         <div
+          className="app-shell"
           style={{
-            minHeight: "100dvh",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -43,7 +43,7 @@ export default class ErrorBoundary extends Component {
               border: "none",
               cursor: "pointer",
               background: "var(--accent)",
-              color: "#0A0810",
+              color: "var(--bg)",
               fontSize: 13,
               fontWeight: 800,
             }}

@@ -56,7 +56,7 @@ export default function Toast({ toasts, onDismiss }) {
                 border: "none",
                 cursor: "pointer",
                 background: VARIANT_COLOR[t.variant] ?? "var(--accent)",
-                color: "#0A0810",
+                color: "var(--bg)",
                 fontSize: 11.5,
                 fontWeight: 800,
               }}

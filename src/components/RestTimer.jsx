@@ -91,7 +91,7 @@ export default function RestTimer({ seconds, onClose }) {
             cursor: "pointer",
             border: "none",
             background: done ? "var(--done)" : "var(--accent)",
-            color: "#0A0810",
+            color: "var(--bg)",
             fontSize: 12,
             fontWeight: 800,
           }}

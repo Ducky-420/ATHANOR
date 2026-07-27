@@ -239,7 +239,7 @@ export default function App() {
                   minHeight: 32,
                   fontSize: 9.5,
                   fontWeight: 800,
-                  color: "#0A0810",
+                  color: "var(--bg)",
                   cursor: "pointer",
                 }}
               >
@@ -344,7 +344,7 @@ export default function App() {
               fontWeight: 800,
               letterSpacing: ".06em",
               background: dayId === id ? "var(--accent)" : "var(--surface)",
-              color: dayId === id ? "#0A0810" : "var(--dim)",
+              color: dayId === id ? "var(--bg)" : "var(--dim)",
               transition: "all .18s",
               display: "flex",
               alignItems: "center",
@@ -462,7 +462,7 @@ export default function App() {
                           justifyContent: "center",
                         }}
                       >
-                        {on && <Tick color="#0A0810" />}
+                        {on && <Tick color="var(--bg)" />}
                       </div>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <p style={{ margin: 0, fontSize: 12.5, fontWeight: 600, color: on ? "var(--extra)" : "var(--text-primary)" }}>{ex.name}</p>
