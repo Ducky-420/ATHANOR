@@ -1,7 +1,6 @@
-import { createContext, useCallback, useContext, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Toast from "../components/Toast.jsx";
-
-const ToastContext = createContext(null);
+import { ToastContext } from "./ToastContext.js";
 
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
@@ -30,10 +29,4 @@ export function ToastProvider({ children }) {
       <Toast toasts={toasts} onDismiss={dismissToast} />
     </ToastContext.Provider>
   );
-}
-
-export function useToast() {
-  const ctx = useContext(ToastContext);
-  if (!ctx) throw new Error("useToast must be used within a ToastProvider");
-  return ctx;
 }

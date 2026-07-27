@@ -1,6 +1,6 @@
 # Athanor
 
-[![CI](https://github.com/Ducky-420/athanor-workout-log/actions/workflows/ci.yml/badge.svg)](https://github.com/Ducky-420/athanor-workout-log/actions/workflows/ci.yml)
+[![CI](https://github.com/Ducky-420/ATHANOR/actions/workflows/ci.yml/badge.svg)](https://github.com/Ducky-420/ATHANOR/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A minimal, offline-first workout logging PWA. Pick a day, log your sets, keep your streak — nothing leaves your device.

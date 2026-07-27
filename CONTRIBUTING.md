@@ -5,8 +5,8 @@ Thanks for considering a contribution! This is a small, focused project — plea
 ## Dev setup
 
 ```bash
-git clone https://github.com/Ducky-420/athanor-workout-log.git
-cd athanor-workout-log
+git clone https://github.com/Ducky-420/ATHANOR.git
+cd ATHANOR
 npm install
 npm run dev
 ```

@@ -3,7 +3,7 @@ import { DAYS, DAY_ORDER } from "./data/days.js";
 import { initDay, COMPOUND } from "./App.helpers.js";
 import { loadStore, saveStore, freshAllState } from "./lib/storage.js";
 import { todayISO, fmtDate } from "./lib/dateUtils.js";
-import { useToast } from "./hooks/useToast.jsx";
+import { useToast } from "./hooks/useToast.js";
 import { Tick } from "./components/icons/Tick.jsx";
 import ExCard from "./components/ExCard.jsx";
 import EmptyState from "./components/EmptyState.jsx";
