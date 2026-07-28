@@ -24,6 +24,7 @@ npm run dev
 - Keep `src/data/days.js` as plain data — no logic there.
 - New icon-only buttons need an `aria-label`. New interactive controls should be at least 44×44px.
 - If you add a color to `src/styles/tokens.css`, check it against WCAG AA (4.5:1 for normal text, 3:1 for large text/UI components) against the backgrounds it'll actually be used on.
+- **Persistence**: if you add a new piece of state that needs to survive a reload, persist it via `saveStore({ yourField })` (a partial, read-merge-write — see [DATA_MODEL.md](DATA_MODEL.md)), never a direct `localStorage.setItem` — two independent persistence effects writing the full blob will clobber each other's fields.
 
 ## Branching / PRs
 

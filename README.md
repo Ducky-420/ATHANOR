@@ -23,7 +23,7 @@ A minimal, offline-first workout logging PWA. Pick a day, log your sets, keep yo
 
 - **[Vite](https://vitejs.dev/)** + **React 18** — no backend, no framework beyond what Vite + React provide, no router (screen switching is plain state in `App.jsx`)
 - `App.jsx` is a thin navigation shell: it owns `screen`/`history`/`bodyLog` state and renders the floating `TabBar` plus the active screen (`LogScreen`, `ProgressScreen`, or `BodyScreen`)
-- `LogScreen` owns today's workout state (unchanged from before the nav was added) and persists it independently from `history`/`bodyLog` — `saveStore` does a safe read-merge-write so the two can't clobber each other
+- `LogScreen` owns today's workout state (unchanged from before the nav was added) and persists it independently from `history`/`bodyLog` — `saveStore` does a safe read-merge-write so the two can't clobber each other. Full storage schema: [DATA_MODEL.md](DATA_MODEL.md)
 - Static workout program data lives in `src/data/days.js`
 - Colors are CSS custom properties defined in `src/styles/tokens.css`, referenced from component inline styles — see [CONTRIBUTING.md](CONTRIBUTING.md) for the convention
 - The rest timer is code-split via `React.lazy`/`Suspense`, since it's the one conditionally-rendered overlay in the app
@@ -81,7 +81,7 @@ Athanor stores everything locally in your browser (`localStorage`). There is no 
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Please also read our [Code of Conduct](CODE_OF_CONDUCT.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [DATA_MODEL.md](DATA_MODEL.md) (the `localStorage` schema — `history`, `bodyLog`, and the read-merge-write persistence pattern). Please also read our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Changelog
 

@@ -2,6 +2,10 @@ import { todayISO } from "./dateUtils.js";
 
 const MS_PER_DAY = 86400000;
 
+// Date.now() alone can collide if summarizeSession is called twice in the
+// same millisecond; this counter guarantees uniqueness regardless.
+let idCounter = 0;
+
 // Local midnight, matching todayISO/fmtDate's timezone-safe convention —
 // never Date#toISOString (UTC), which can land on the wrong calendar day.
 function toLocalMidnight(iso) {
@@ -24,7 +28,7 @@ export function summarizeSession(day, state, dateISO, dayId) {
   const pct = totalSets ? Math.round((doneSets / totalSets) * 100) : 0;
 
   return {
-    id: `${dateISO}-${dayId}-${Date.now()}`,
+    id: `${dateISO}-${dayId}-${Date.now()}-${++idCounter}`,
     dateISO,
     dayId,
     dayName: day.name,
