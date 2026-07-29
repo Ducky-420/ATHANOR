@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { fmtTime } from "../lib/dateUtils.js";
 import { REST_TIMER_BOTTOM } from "../lib/layout.js";
+import { requestWakeLock, vibrate, playBeep } from "../lib/timerAlerts.js";
 
 export default function RestTimer({ seconds, onClose }) {
   const [left, setLeft] = useState(seconds);
   const ref = useRef(null);
+  const alertedRef = useRef(false);
 
   useEffect(() => {
     ref.current = setInterval(() => setLeft((l) => (l <= 1 ? 0 : l - 1)), 1000);
@@ -13,6 +15,45 @@ export default function RestTimer({ seconds, onClose }) {
 
   useEffect(() => {
     if (left === 0 && ref.current) clearInterval(ref.current);
+  }, [left]);
+
+  // Keep the screen awake for the duration of the rest — also sidesteps a
+  // real bug: without it, backgrounded tabs throttle setInterval, so the
+  // countdown above can silently drift from real elapsed time.
+  useEffect(() => {
+    let sentinel = null;
+    let cancelled = false;
+    requestWakeLock().then((s) => {
+      if (cancelled) s?.release();
+      else sentinel = s;
+    });
+
+    // Wake locks are released automatically when a tab is backgrounded;
+    // re-acquire on return so a rest that spans an app-switch still holds.
+    const onVisible = () => {
+      if (document.visibilityState === "visible" && !sentinel) {
+        requestWakeLock().then((s) => {
+          if (cancelled) s?.release();
+          else sentinel = s;
+        });
+      }
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
+    return () => {
+      cancelled = true;
+      document.removeEventListener("visibilitychange", onVisible);
+      sentinel?.release();
+    };
+  }, []);
+
+  // Fire once, the moment the countdown actually reaches zero.
+  useEffect(() => {
+    if (left === 0 && !alertedRef.current) {
+      alertedRef.current = true;
+      vibrate(200);
+      playBeep();
+    }
   }, [left]);
 
   const done = left === 0;
