@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Tick } from "./icons/Tick.jsx";
 
-export default function SetRow({ set, def, onChange, onDone }) {
+export default function SetRow({ set, def, onChange, onDone, lastSet }) {
   const label = def.assist ? "assist" : def.timed ? "sec" : def.bodyweight ? "+kg" : def.perSide ? "kg/side" : "kg";
   const [pop, setPop] = useState(false);
   const prevDone = useRef(set.done);
@@ -35,8 +35,8 @@ export default function SetRow({ set, def, onChange, onDone }) {
           inputMode="decimal"
           value={set.w}
           onChange={(e) => onChange("w", e.target.value)}
-          placeholder="—"
-          aria-label={`Set ${set.n} weight`}
+          placeholder={lastSet?.w || "—"}
+          aria-label={`Set ${set.n} weight${lastSet?.w ? `, last time ${lastSet.w}` : ""}`}
           style={{
             width: "100%",
             background: "var(--input)",
@@ -72,8 +72,8 @@ export default function SetRow({ set, def, onChange, onDone }) {
           inputMode="numeric"
           value={set.r}
           onChange={(e) => onChange("r", e.target.value)}
-          placeholder="—"
-          aria-label={`Set ${set.n} reps`}
+          placeholder={lastSet?.r || "—"}
+          aria-label={`Set ${set.n} reps${lastSet?.r ? `, last time ${lastSet.r}` : ""}`}
           style={{
             width: "100%",
             background: "var(--input)",

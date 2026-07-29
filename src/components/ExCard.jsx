@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Chev } from "./icons/Chev.jsx";
 import SetRow from "./SetRow.jsx";
 
-export default function ExCard({ def, data, open, onToggle, onSet, onDone, onNote, onVariant, isExtra, idx }) {
+export default function ExCard({ def, data, open, onToggle, onSet, onDone, onNote, onVariant, lastSet, onFillLast, isExtra, idx }) {
   const [showNote, setShowNote] = useState(false);
   const doneN = data.sets.filter((s) => s.done).length;
   const total = data.sets.length;
   const allDone = doneN === total;
+  const hasFillable = data.sets.some((s, i) => !s.w && !s.r && lastSet?.[i]);
   const accentVar = isExtra ? "var(--extra)" : "var(--accent)";
   // Raw hex needed alongside accentVar: the active-variant background below
   // blends in an alpha suffix, which only works on a literal hex, not var().
@@ -136,8 +137,30 @@ export default function ExCard({ def, data, open, onToggle, onSet, onDone, onNot
             </div>
           )}
 
+          {hasFillable && (
+            <button
+              type="button"
+              onClick={onFillLast}
+              style={{
+                width: "100%",
+                marginBottom: 9,
+                padding: "8px 0",
+                minHeight: 36,
+                borderRadius: 7,
+                cursor: "pointer",
+                background: "transparent",
+                border: `1px solid ${accentVar}`,
+                color: accentVar,
+                fontSize: 11,
+                fontWeight: 700,
+              }}
+            >
+              ↻ Use last session's numbers
+            </button>
+          )}
+
           {data.sets.map((s, i) => (
-            <SetRow key={i} set={s} def={def} onChange={(f, v) => onSet(i, f, v)} onDone={() => onDone(i)} />
+            <SetRow key={i} set={s} def={def} onChange={(f, v) => onSet(i, f, v)} onDone={() => onDone(i)} lastSet={lastSet?.[i]} />
           ))}
 
           {showNote || data.note ? (

@@ -25,15 +25,19 @@ export default function LogScreen({ onArchiveSession, onUndoArchiveSession }) {
   const [timerKey, setTimerKey] = useState(0);
   const [showPool, setShowPool] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
+  // { [exerciseId]: [{ w, r } | undefined, ...] } — last completed value per set
+  // index, independent of allState so it survives a Reset day (the whole
+  // point is remembering last session's numbers for next time).
+  const [lastSets, setLastSets] = useState(() => stored?.lastSets ?? {});
   const day = DAYS[dayId];
   const state = allState[dayId];
 
   // Persist on every change
   useEffect(() => {
-    saveStore({ allState, dayId, dateISO }, (msg) => {
+    saveStore({ allState, dayId, dateISO, lastSets }, (msg) => {
       showToast({ message: msg, variant: "error", duration: 6000 });
     });
-  }, [allState, dayId, dateISO, showToast]);
+  }, [allState, dayId, dateISO, lastSets, showToast]);
 
   const switchDay = useCallback((id) => {
     setDayId(id);
@@ -87,7 +91,8 @@ export default function LogScreen({ onArchiveSession, onUndoArchiveSession }) {
 
   const toggleDone = useCallback(
     (id, i, def) => {
-      const wasDone = state[id].sets[i].done;
+      const set = state[id].sets[i];
+      const wasDone = set.done;
       upd(id, (ex) => ({
         ...ex,
         sets: ex.sets.map((s, j) => (j === i ? { ...s, done: !s.done } : s)),
@@ -95,12 +100,31 @@ export default function LogScreen({ onArchiveSession, onUndoArchiveSession }) {
       if (!wasDone) {
         setTimer(COMPOUND.includes(def.name) ? 150 : 75);
         setTimerKey((k) => k + 1);
+        // Remember this set's numbers for next time — only on completion,
+        // so unconfirmed in-progress typing never overwrites the reference.
+        setLastSets((prev) => {
+          const forEx = [...(prev[id] ?? [])];
+          forEx[i] = { w: set.w, r: set.r };
+          return { ...prev, [id]: forEx };
+        });
       }
     },
     [state, upd]
   );
 
   const toggleExtra = useCallback((id) => upd(id, (ex) => ({ ...ex, active: !ex.active })), [upd]);
+
+  const fillFromLast = useCallback(
+    (id) => {
+      const forEx = lastSets[id];
+      if (!forEx) return;
+      upd(id, (ex) => ({
+        ...ex,
+        sets: ex.sets.map((s, j) => (s.w || s.r || !forEx[j] ? s : { ...s, w: forEx[j].w, r: forEx[j].r })),
+      }));
+    },
+    [lastSets, upd]
+  );
 
   const totalSets = visible.reduce((a, e) => a + state[e.id].sets.length, 0);
   const doneSets = visible.reduce((a, e) => a + state[e.id].sets.filter((s) => s.done).length, 0);
@@ -374,6 +398,8 @@ export default function LogScreen({ onArchiveSession, onUndoArchiveSession }) {
             onDone={(i) => toggleDone(ex.id, i, ex)}
             onNote={(v) => upd(ex.id, (e) => ({ ...e, note: v }))}
             onVariant={(v) => upd(ex.id, (e) => ({ ...e, variant: v }))}
+            lastSet={lastSets[ex.id]}
+            onFillLast={() => fillFromLast(ex.id)}
             isExtra={false}
           />
         ))}
@@ -397,6 +423,8 @@ export default function LogScreen({ onArchiveSession, onUndoArchiveSession }) {
             onDone={(i) => toggleDone(ex.id, i, ex)}
             onNote={(v) => upd(ex.id, (e) => ({ ...e, note: v }))}
             onVariant={(v) => upd(ex.id, (e) => ({ ...e, variant: v }))}
+            lastSet={lastSets[ex.id]}
+            onFillLast={() => fillFromLast(ex.id)}
             isExtra
           />
         ))}
