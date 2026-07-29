@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { calculatePlates } from "../lib/plateMath.js";
+import { calculatePlates, suggestWarmup } from "../lib/plateMath.js";
 
 export default function PlateCalculator({ accentVar }) {
   const [input, setInput] = useState("");
   const { plates, remainder } = calculatePlates(input);
+  const warmup = suggestWarmup(input);
 
   return (
     <div
@@ -68,6 +69,12 @@ export default function PlateCalculator({ accentVar }) {
       {remainder > 0 && (
         <p style={{ margin: "6px 0 0", fontSize: 10.5, color: "var(--danger)" }}>
           {remainder.toFixed(2)}kg can't be made exactly with this plate set.
+        </p>
+      )}
+
+      {warmup.length > 0 && (
+        <p style={{ margin: "8px 0 0", fontSize: 10.5, color: "var(--dim)", fontWeight: 600 }}>
+          Warm-up: {warmup.join(" → ")} → <span style={{ color: "var(--text-primary)" }}>{input}</span>
         </p>
       )}
     </div>

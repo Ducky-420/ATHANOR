@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculatePlates, PLATE_SET } from "./plateMath.js";
+import { calculatePlates, suggestWarmup, PLATE_SET } from "./plateMath.js";
 
 describe("calculatePlates", () => {
   it("returns nothing for zero, negative, or non-numeric input", () => {
@@ -46,5 +46,27 @@ describe("calculatePlates", () => {
 
   it("default plate set is largest-first", () => {
     expect(PLATE_SET).toEqual([20, 15, 10, 5, 2.5, 1.25]);
+  });
+});
+
+describe("suggestWarmup", () => {
+  it("returns nothing for zero, negative, or non-numeric input", () => {
+    expect(suggestWarmup(0)).toEqual([]);
+    expect(suggestWarmup(-5)).toEqual([]);
+    expect(suggestWarmup("")).toEqual([]);
+    expect(suggestWarmup("abc")).toEqual([]);
+  });
+
+  it("suggests two steps at roughly 50% and 80%, rounded to the smallest plate", () => {
+    expect(suggestWarmup(40)).toEqual([20, 32.5]);
+  });
+
+  it("never suggests a step at or above the target", () => {
+    const warmup = suggestWarmup(2);
+    expect(warmup.every((w) => w < 2)).toBe(true);
+  });
+
+  it("respects a custom plate set's smallest increment", () => {
+    expect(suggestWarmup(100, [10, 5])).toEqual([50, 80]);
   });
 });

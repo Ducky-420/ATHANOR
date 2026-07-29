@@ -26,3 +26,15 @@ export function calculatePlates(targetPerSide, plateSet = PLATE_SET) {
   }
   return { plates, remainder: Math.max(remaining, 0) };
 }
+
+// Two simple warm-up steps (50% / 80% of the target), rounded to the
+// nearest loadable increment (the smallest plate). No per-step plate
+// breakdown — just the numbers, so a ramp-up doesn't need its own UI.
+export function suggestWarmup(targetPerSide, plateSet = PLATE_SET) {
+  const target = Number(targetPerSide);
+  if (!Number.isFinite(target) || target <= 0) return [];
+
+  const smallest = plateSet[plateSet.length - 1];
+  const round = (v) => Math.round(v / smallest) * smallest;
+  return [round(target * 0.5), round(target * 0.8)].filter((w) => w > 0 && w < target);
+}
