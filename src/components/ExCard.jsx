@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { Chev } from "./icons/Chev.jsx";
 import SetRow from "./SetRow.jsx";
+import PlateCalculator from "./PlateCalculator.jsx";
 
 export default function ExCard({ def, data, open, onToggle, onSet, onDone, onNote, onVariant, lastSet, onFillLast, isExtra, idx }) {
   const [showNote, setShowNote] = useState(false);
+  const [showPlates, setShowPlates] = useState(false);
   const doneN = data.sets.filter((s) => s.done).length;
   const total = data.sets.length;
   const allDone = doneN === total;
   const hasFillable = data.sets.some((s, i) => !s.w && !s.r && lastSet?.[i]);
+  // Machines/barbells loaded with real plates, either always (plateLoaded)
+  // or only in their "Free Weight" variant — Pin Select stacks and
+  // dumbbell exercises (Lateral Raise, Hammer Curl, etc.) don't apply.
+  const isPlateLoaded = def.plateLoaded || (def.variants?.includes("Free Weight") && data.variant === "Free Weight");
   const accentVar = isExtra ? "var(--extra)" : "var(--accent)";
   // Raw hex needed alongside accentVar: the active-variant background below
   // blends in an alpha suffix, which only works on a literal hex, not var().
@@ -157,6 +163,33 @@ export default function ExCard({ def, data, open, onToggle, onSet, onDone, onNot
             >
               ↻ Use last session's numbers
             </button>
+          )}
+
+          {isPlateLoaded && (
+            <>
+              <button
+                type="button"
+                onClick={() => setShowPlates((p) => !p)}
+                aria-expanded={showPlates}
+                style={{
+                  marginBottom: showPlates ? 8 : 9,
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "var(--faint)",
+                  fontSize: 11,
+                  padding: 0,
+                  fontWeight: 700,
+                  minHeight: 28,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 4,
+                }}
+              >
+                ⚖ {showPlates ? "Hide plate calculator" : "Plate calculator"}
+              </button>
+              {showPlates && <PlateCalculator accentVar={accentVar} />}
+            </>
           )}
 
           {data.sets.map((s, i) => (

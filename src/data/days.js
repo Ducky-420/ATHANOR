@@ -4,9 +4,9 @@ export const DAYS = {
     focus: "Chest + Triceps",
     tag: "DAY 1",
     baseline: [
-      { id: "a1", name: "Incline Chest Press", sets: 4, target: "6–10", perSide: true, group: "Chest" },
+      { id: "a1", name: "Incline Chest Press", sets: 4, target: "6–10", perSide: true, group: "Chest", plateLoaded: true },
       { id: "a2", name: "Flat Chest Press", sets: 3, target: "8–10", perSide: true, group: "Chest", variants: ["Free Weight", "Pin Select"] },
-      { id: "a3", name: "Chest-Supported Row", sets: 4, target: "8–10", perSide: true, group: "Back" },
+      { id: "a3", name: "Chest-Supported Row", sets: 4, target: "8–10", perSide: true, group: "Back", plateLoaded: true },
       { id: "a4", name: "Lat Pulldown", sets: 3, target: "8–10", perSide: false, group: "Back" },
       { id: "a5", name: "Shoulder Press", sets: 3, target: "8–10", perSide: true, group: "Shoulders", variants: ["Free Weight", "Pin Select"] },
       { id: "a6", name: "Lateral Raise", sets: 3, target: "12–20", perSide: true, group: "Shoulders" },
@@ -27,8 +27,8 @@ export const DAYS = {
     focus: "Quads",
     tag: "DAY 2",
     baseline: [
-      { id: "b1", name: "Hack Squat", sets: 4, target: "8–12", perSide: true, group: "Quads" },
-      { id: "b2", name: "Leg Press", sets: 3, target: "10–12", perSide: true, group: "Quads" },
+      { id: "b1", name: "Hack Squat", sets: 4, target: "8–12", perSide: true, group: "Quads", plateLoaded: true },
+      { id: "b2", name: "Leg Press", sets: 3, target: "10–12", perSide: true, group: "Quads", plateLoaded: true },
       { id: "b3", name: "Leg Extension", sets: 3, target: "12–15", perSide: false, group: "Quads" },
       { id: "b4", name: "Lying Leg Curl", sets: 3, target: "10–12", perSide: false, group: "Hamstrings" },
       { id: "b5", name: "Standing Calf Raise", sets: 3, target: "15–20", perSide: false, group: "Calves" },
@@ -45,7 +45,7 @@ export const DAYS = {
     focus: "Back + Biceps",
     tag: "DAY 3",
     baseline: [
-      { id: "c1", name: "Incline Chest Press", sets: 4, target: "6–10", perSide: true, group: "Chest" },
+      { id: "c1", name: "Incline Chest Press", sets: 4, target: "6–10", perSide: true, group: "Chest", plateLoaded: true },
       { id: "c2", name: "Flat Chest Press", sets: 3, target: "8–10", perSide: true, group: "Chest", variants: ["Free Weight", "Pin Select"] },
       { id: "c3", name: "Assisted Pull-ups", sets: 4, target: "8–10", perSide: false, group: "Back", assist: true },
       { id: "c4", name: "Seated Cable Row", sets: 3, target: "8–10", perSide: false, group: "Back" },
@@ -68,9 +68,9 @@ export const DAYS = {
     focus: "Hamstrings",
     tag: "DAY 4",
     baseline: [
-      { id: "d1", name: "Romanian Deadlift", sets: 4, target: "8–10", perSide: true, group: "Hamstrings" },
+      { id: "d1", name: "Romanian Deadlift", sets: 4, target: "8–10", perSide: true, group: "Hamstrings", plateLoaded: true },
       { id: "d2", name: "Lying Leg Curl", sets: 3, target: "10–12", perSide: false, group: "Hamstrings" },
-      { id: "d3", name: "Leg Press", sets: 3, target: "10–12", perSide: true, group: "Quads" },
+      { id: "d3", name: "Leg Press", sets: 3, target: "10–12", perSide: true, group: "Quads", plateLoaded: true },
       { id: "d4", name: "Back Extension", sets: 3, target: "12–15", perSide: false, group: "Posterior", bodyweight: true },
       { id: "d5", name: "Seated Calf Raise", sets: 3, target: "15–20", perSide: false, group: "Calves" },
       { id: "d6", name: "Standing Calf Raise", sets: 3, target: "15–20", perSide: false, group: "Calves" },
